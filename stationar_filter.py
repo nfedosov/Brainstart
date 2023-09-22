@@ -129,7 +129,7 @@ def generate_matsuda_params(fs: float, fc: float, A: float):
     return Phi, H    
     
 
-
+def fit_kf_grid()
 
 
 def fit_kf_parameters(meas, kf, cf, A, fs, n_iter: int = 2, tol: float = 1e-3):

@@ -1,0 +1,27 @@
+lslver_autogen/timestamp: \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCInformation.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakePackageConfigHelpers.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckIncludeFile.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckLibraryExists.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GNU.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindGit.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageMessage.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindThreads.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/GNUInstallDirs.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake \
+	C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/WriteBasicConfigVersionFile.cmake \
+	C:/Users/Fedosov/Documents/projects/Brainstart/Brainstart/liblsl-master/CMakeLists.txt \
+	C:/Users/Fedosov/Documents/projects/Brainstart/Brainstart/liblsl-master/cmake/LSLCMake.cmake \
+	C:/Users/Fedosov/Documents/projects/Brainstart/Brainstart/liblsl-master/cmake/LSLConfig.cmake \
+	C:/Users/Fedosov/Documents/projects/Brainstart/Brainstart/liblsl-master/testing/lslver.c \
+	C:/Users/Fedosov/Documents/projects/Brainstart/build-Brainstart-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/3.24.2/CMakeCCompiler.cmake \
+	C:/Qt/Tools/CMake_64/bin/cmake.exe
