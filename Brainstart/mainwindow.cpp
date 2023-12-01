@@ -3,6 +3,9 @@
 #include "./ui_mainwindow.h"
 #include<QDebug>
 #include<QtGlobal>
+#include <iostream>
+#include <fstream> // Include the <fstream> header
+#include <sstream>
 #include "kalmanparamchoice.h"
 
 #include "signalplotwin.h"
@@ -18,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
+    this->setFixedSize(600,400);
+
     QWidget *centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
 
@@ -26,8 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout *hLayout_1 = new QHBoxLayout();
     QHBoxLayout *hLayout_2 = new QHBoxLayout();
 
-    QVBoxLayout *vLayKF_CFIR = new QVBoxLayout();
-    QVBoxLayout *vLayENV_PHASE = new QVBoxLayout();
+    //QVBoxLayout *vLayKF_CFIR = new QVBoxLayout();
+    //QVBoxLayout *vLayENV_PHASE = new QVBoxLayout();
 
 
 
@@ -39,70 +44,94 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     demoButton = new QPushButton("Start Demo", this);
-    setKalmanManual = new QPushButton("Set Kalman Params", this);
+    setKalmanManual = new QPushButton("Set manually \ndata processor parameters", this);
     findStreams = new QPushButton("find streams",this);
 
-    envelopeFBButton = new QRadioButton("Envelope\nexperiment", this);
-    phaseFBButton = new QRadioButton("Phase\nexperiment", this);
+    demoButton->setStyleSheet("text-align: left;");
+    setKalmanManual->setStyleSheet("text-align: left;");
+    findStreams->setStyleSheet("text-align: left;");
 
 
-    useKFButton = new QRadioButton("Use\nKalman Filter", this);
-    useCFIRButton = new QRadioButton("Use\nCFIR", this);
+    lineEdit1 = new QLineEdit(this);
+    lineEdit2 = new QLineEdit(this);
 
 
-    buttonGroupEP = new QButtonGroup();
-    buttonGroupEP->addButton(envelopeFBButton);
-    buttonGroupEP->addButton(phaseFBButton);
+    connect(lineEdit1, &QLineEdit::textChanged, this, &MainWindow::onQ0changed);
+    connect(lineEdit2, &QLineEdit::textChanged, this, &MainWindow::onQ1changed);
+    //envelopeFBButton = new QRadioButton("Envelope\nexperiment", this);
+    //phaseFBButton = new QRadioButton("Phase\nexperiment", this);
+
+
+    //useKFButton = new QRadioButton("Use\nKalman Filter", this);
+    //useCFIRButton = new QRadioButton("Use\nCFIR", this);
+
+
+    //buttonGroupEP = new QButtonGroup();
+    //buttonGroupEP->addButton(envelopeFBButton);
+    //buttonGroupEP->addButton(phaseFBButton);
 
 
     // Set default checked button
-    envelopeFBButton->setChecked(true);
+    //envelopeFBButton->setChecked(true);
 
 
-    buttonGroupKC = new QButtonGroup();
-    buttonGroupKC->addButton(useKFButton, 0);
-    buttonGroupKC->addButton(useCFIRButton, 1);
+    //buttonGroupKC = new QButtonGroup();
+    //buttonGroupKC->addButton(useKFButton, 0);
+    //buttonGroupKC->addButton(useCFIRButton, 1);
 
     // Set default checked button
-    useKFButton->setChecked(true);
+    //useKFButton->setChecked(true);
 
     // Connect signals and slots for button group
     //connect(buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(handleButtonGroupClick(int)));
 
+    QVBoxLayout *menu_layout = new QVBoxLayout();
 
+    menu_layout->addWidget(demoButton);
+    menu_layout->addWidget(findStreams);
+    menu_layout->addStretch(1);
+    menu_layout->addWidget(setKalmanManual);
+    //
+    hLayout_1->addLayout(menu_layout);
 
-    hLayout_1->addWidget(demoButton);
-    hLayout_1->addWidget(setKalmanManual);
-    hLayout_1->addWidget(findStreams);
+    hLayout_1->addStretch(1);
     hLayout_1->addWidget(streamListWidget);
 
-    hLayout_1->setStretch(0,1);
-    hLayout_1->setStretch(1,1);
-    hLayout_1->setStretch(2,1);
-    hLayout_1->setStretch(3,1);
+    //hLayout_1->setStretch(0,1);
+    //hLayout_1->setStretch(1,1);
+    //hLayout_1->setStretch(2,1);
+    //hLayout_1->setStretch(3,2);
 
 
-    vLayENV_PHASE->addWidget(envelopeFBButton);
-    vLayENV_PHASE->addWidget(phaseFBButton);
+    //vLayENV_PHASE->addWidget(envelopeFBButton);
+    //vLayENV_PHASE->addWidget(phaseFBButton);
 
-    vLayKF_CFIR->addWidget(useKFButton);
-    vLayKF_CFIR->addWidget(useCFIRButton);
+    //vLayKF_CFIR->addWidget(useKFButton);
+    //vLayKF_CFIR->addWidget(useCFIRButton);
 
 
 
-    hLayout_2->addLayout(vLayKF_CFIR);
-    hLayout_2->addLayout(vLayENV_PHASE);
+    //hLayout_2->addLayout(vLayKF_CFIR);
+    //hLayout_2->addLayout(vLayENV_PHASE);
 
     vLayout->addLayout(hLayout_1);
+
+    load_params_button = new QPushButton("Load parameteres", this);
+
+    vLayout->addStretch(1);
+    vLayout->addWidget(load_params_button);
+    vLayout->addWidget(lineEdit1);
+    vLayout->addWidget(lineEdit2);
+
     QWidget *emptyWidget = new QWidget();
 
 
-    vLayout->addWidget(emptyWidget);
-    vLayout->addLayout(hLayout_2);
+    //vLayout->addWidget(emptyWidget);
+    //vLayout->addLayout(hLayout_2);
 
-    vLayout->setStretch(0,1);
-    vLayout->setStretch(1,2);
-    vLayout->setStretch(2,1);
+    //vLayout->setStretch(0,1);
+    //vLayout->setStretch(1,2);
+    //vLayout->setStretch(2,1);
 
 
 
@@ -122,13 +151,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(setKalmanManual, &QPushButton::clicked, this, &MainWindow::onsetKalmanButtonclicked);
     connect(streamListWidget, &QListWidget::itemClicked, this, &MainWindow::handleStreamSelected);
 
+
+    connect(load_params_button, &QPushButton::clicked, this, &MainWindow::onLoadParams);
     //connect(useCFIRButton, &QRadioButton::clicked, this, &MainWindow::onusecfirButtonClicked);
 
 
     //connect(buttonGroupKC, &QButtonGroup::buttonToggled,
     //    this, &MainWindow::handleButtonGroupKCClick);
     //connect(buttonGroupKC, QOverload<int>::of(&QButtonGroup::buttonClicked), this, &MainWindow::handleButtonGroupKCClick);
-    connect(buttonGroupKC, &QButtonGroup::idClicked, this, &MainWindow::handleButtonGroupKCClick);
+    //connect(buttonGroupKC, &QButtonGroup::idClicked, this, &MainWindow::handleButtonGroupKCClick);
 
 }
 
@@ -145,7 +176,7 @@ void MainWindow::ondemoButtonclicked()
 {
 
 
-    signalplotwin = new SignalPlotWin(datareceiver->Nch,500, datareceiver);
+    signalplotwin = new SignalPlotWin(datareceiver->Nch, datareceiver); // Attention
     signalplotwin->show();
 
 
@@ -175,6 +206,8 @@ void MainWindow::handleStreamSelected()
     datareceiver->Nch =datareceiver->results[datareceiver->stream_idx].channel_count();
     datareceiver->spat_filter.resize(datareceiver->Nch);
     datareceiver->databuffer.resize(datareceiver->Nch);
+    datareceiver->memStreamInfo();
+
     for (int i = 0; i < datareceiver->Nch; i++) {
         datareceiver->spat_filter[i] = 0.5; // CHANGE!!
 
@@ -200,7 +233,7 @@ void MainWindow::onsetKalmanButtonclicked()
 
 }
 
-
+/*
 void MainWindow::handleButtonGroupKCClick(int id)
 {
     qInfo( "I'm here" );
@@ -222,5 +255,108 @@ void MainWindow::handleButtonGroupKCClick(int id)
 //
 
 }
+*/
 
+
+void MainWindow::onLoadParams()
+{
+
+    std::vector<double> values;
+    std::string filename = "C:/Users/Fedosov/Documents/projects/brainstart2/results/params.txt";
+
+
+    std::ifstream file(filename);
+
+        // Check if the file is open
+        if (!file.is_open()) {
+            std::cerr << "Failed to open the file: " << filename << std::endl;
+
+        }
+
+        std::string line;
+        values.clear();
+
+        // Read a line from the file
+        while (std::getline(file, line)) {
+            std::stringstream ss(line);
+            double value;
+            while (ss >> value) {
+                values.push_back(value);
+                // Check if the next character is a comma and skip it
+                if (ss.peek() == ',') {
+                    ss.ignore();
+                }
+            }
+
+        }
+        qDebug()<<"parameters loaded";
+        //qDebug()<<values[0];
+        //qDebug()<<values[1];
+        qDebug()<<values[2];
+        qDebug()<<values[3];
+        qDebug()<<values[4];
+        qDebug()<<values[5];
+        qDebug()<<values[6];
+
+        datareceiver->q0 = values[1];
+        datareceiver->q1 = values[2];
+
+        this->base_q0 = values[1];
+        this->base_q1 = values[2];
+
+        datareceiver->to_prefilter = values[3];
+        for (int i =0; i< this->datareceiver->Nch;i++)
+        {
+             datareceiver->spat_filter[i] = values[i+4];
+
+        }
+        //datareceiver->spat_filter[2] = values[5]; //Attention
+        //datareceiver->spat_filter[3] = values[6]; // Attention
+
+
+        // Close the file
+        file.close();
+
+
+}
+
+
+
+void MainWindow::onQ0changed()
+{
+    QString text_freq = lineEdit1->text();
+
+    bool ok;
+
+
+    double thr = text_freq.toDouble(&ok);
+
+    if (! ok) {
+        // The conversion failed, handle the error
+        qDebug() << "Invalid value entered";
+    } else{
+        datareceiver->q0 = this->base_q0 - thr*0.01*this->base_q0;
+    }
+
+}
+
+
+
+void MainWindow::onQ1changed()
+{
+    QString text_freq = lineEdit2->text();
+
+    bool ok;
+
+
+    double thr = text_freq.toDouble(&ok);
+
+    if (! ok) {
+        // The conversion failed, handle the error
+        qDebug() << "Invalid value entered";
+    } else{
+        datareceiver->q1 = this->base_q1 + thr*0.01*this->base_q1;
+    }
+
+}
 

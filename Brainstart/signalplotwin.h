@@ -11,12 +11,14 @@
 #include "firwin.h"
 #include "simplebarfbwin.h"
 
+#include "code_iir/IIR.h"
+
 
 class SignalPlotWin : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SignalPlotWin(uint Nch,uint srate, DataReceiver*, QWidget *parent = nullptr);
+    explicit SignalPlotWin(uint Nch, DataReceiver*, QWidget *parent = nullptr);
 
     QCustomPlot* plot;
     QCustomPlot** plots_processed;
@@ -50,16 +52,30 @@ public:
     QTimer timer;
     //uint samplesfromstart = 0;
     //uint samplesinwin;
-    int curwinidx;
-    int prevbufidx; // old position in the buffer where data comes from
-    int curbufidx;
+    int curwinidx = 0;
+    int prevbufidx =0; // old position in the buffer where data comes from
+    int curbufidx = 0;
     uint defaultwinlen = 15; //sec
     int curlenwin; // the size of window in samples
     double scale;
     double rng;
 
-    double low_cutoff = 1.0;
-    double high_cutoff = 30.0;
+    QStringList ch_names_string;
+
+    IIR::BiquadsCascade iir_low_bqC;
+    IIR::BiquadsCascade iir_high_bqC;
+    IIR::BiquadsCascade iir_50_bqC;
+    IIR::BiquadsCascade iir_100_bqC;
+    IIR::BiquadsCascade iir_150_bqC;
+    IIR::BiquadsCascade iir_200_bqC;
+
+    double low_cutoff = 2.0;
+    double high_cutoff = 40.0;
+    bool to_Notch = true;
+    bool to_Low = true;
+    bool to_High = true;
+
+
     bool is_started = false;
 
     uint record_pos;

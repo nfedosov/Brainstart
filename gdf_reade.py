@@ -8,3 +8,5 @@ import mne
 
 
 raw =mne.io.Raw('records/probe.fif')
+
+raw.plot()

@@ -4,7 +4,6 @@
 
 #include <string>
 #include <vector>
-#include "idataprocessor.h"
 
 #include <C:/Users/Fedosov/Documents/projects/Brainstart/Brainstart/eigen-3.4.0/Eigen/Dense>
 
@@ -12,7 +11,7 @@
 using namespace std;
 using namespace Eigen;
 
-class CFIR: public IDataProcessor
+class CFIR
 {
 public:
     CFIR();//(int numtaps, double low_cutoff, double high_cutoff, double fs, string window);
@@ -26,7 +25,7 @@ public:
     int Ntaps;
 
 
-    Vector2d step(double y) override;
+    Vector2d step(double y);
 
 
 

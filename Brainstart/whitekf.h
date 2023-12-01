@@ -16,11 +16,15 @@ public:
     double q;
     double r;
 
-    double default_A = 0.99;
+    double low_thr;
+    double high_thr;
+
+    double default_A = 0.995;
     double default_freq = 10.0;
-    double default_srate = 500.0;
-    double default_r = 0.1;
-    double default_q = 0.00001;
+    double default_srate = 1000.0; //ATTENTION
+    double default_r = 100;
+    double default_q = 0.01;
+
 
 
     Matrix2d Psi = MatrixXd(2,2);

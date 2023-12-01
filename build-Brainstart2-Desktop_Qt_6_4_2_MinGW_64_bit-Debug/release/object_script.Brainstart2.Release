@@ -19,6 +19,8 @@ release/fiff_info.o
 release/fiff_info_base.o
 release/fiff_ch_info.o
 release/fiff_ch_pos.o
+release/IIR.o
+release/stdafx.o
 release/moc_signaltoolbox.o
 release/moc_feedbackwin.o
 release/moc_mainwindow.o

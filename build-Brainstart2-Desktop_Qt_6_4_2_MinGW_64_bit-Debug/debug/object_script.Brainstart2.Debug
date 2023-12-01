@@ -19,6 +19,8 @@ debug/fiff_info.o
 debug/fiff_info_base.o
 debug/fiff_ch_info.o
 debug/fiff_ch_pos.o
+debug/IIR.o
+debug/stdafx.o
 debug/moc_signaltoolbox.o
 debug/moc_feedbackwin.o
 debug/moc_mainwindow.o

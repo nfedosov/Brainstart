@@ -26,6 +26,9 @@ public:
     ~MainWindow();
 
 
+    double base_q0 = 0;
+    double base_q1 = 0;
+
     IDataProcessor *dataproc;
 
 
@@ -44,10 +47,15 @@ private slots:
     void ondemoButtonclicked();
     void onsetKalmanButtonclicked();
     //void handleButtonGroupKCClick(int);
-    void handleButtonGroupKCClick(int);
+    //void handleButtonGroupKCClick(int);
     void onfindStreamsClicked();
     void handleStreamSelected();
+    void onLoadParams();
 
+
+
+    void onQ0changed();
+    void onQ1changed();
     //void onusecfirButtonClicked();
     //void onusekfButtonClicked();
 
@@ -57,16 +65,19 @@ private:
     QPushButton *demoButton;
     QPushButton *setKalmanManual;
     QPushButton *findStreams;
+    QLineEdit *lineEdit1;
+    QLineEdit *lineEdit2;
     //QCheckBox *envelopeFB; REDO INTO QCHECKOX
     //QCheckBox *phaseFB;
-    QRadioButton *envelopeFBButton;
-    QRadioButton *phaseFBButton;
-    QButtonGroup* buttonGroupEP;
+    //QRadioButton *envelopeFBButton;
+    //QRadioButton *phaseFBButton;
+    //QButtonGroup* buttonGroupEP;
 
-    QRadioButton *useKFButton;
-    QRadioButton *useCFIRButton;
+    //QRadioButton *useKFButton;
+    //QRadioButton *useCFIRButton;
 
-    QButtonGroup* buttonGroupKC;
+    //QButtonGroup* buttonGroupKC;
+    QPushButton* load_params_button;
 
 
     QListWidget* streamListWidget;

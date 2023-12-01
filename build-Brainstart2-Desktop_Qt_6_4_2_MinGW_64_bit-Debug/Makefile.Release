@@ -70,7 +70,9 @@ SOURCES       = ..\..\brainstart2\Brainstart2\signaltoolbox.cpp \
 		..\..\brainstart2\Brainstart2\savedata\fiff_info.cpp \
 		..\..\brainstart2\Brainstart2\savedata\fiff_info_base.cpp \
 		..\..\brainstart2\Brainstart2\savedata\fiff_ch_info.cpp \
-		..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.cpp release\moc_signaltoolbox.cpp \
+		..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.cpp \
+		..\..\brainstart2\Brainstart2\code_iir\IIR.cpp \
+		..\..\brainstart2\Brainstart2\code_iir\stdafx.cpp release\moc_signaltoolbox.cpp \
 		release\moc_feedbackwin.cpp \
 		release\moc_mainwindow.cpp \
 		release\moc_simplebarfbwin.cpp \
@@ -99,6 +101,8 @@ OBJECTS       = release/signaltoolbox.o \
 		release/fiff_info_base.o \
 		release/fiff_ch_info.o \
 		release/fiff_ch_pos.o \
+		release/IIR.o \
+		release/stdafx.o \
 		release/moc_signaltoolbox.o \
 		release/moc_feedbackwin.o \
 		release/moc_mainwindow.o \
@@ -108,7 +112,8 @@ OBJECTS       = release/signaltoolbox.o \
 		release/moc_signalplotwin.o \
 		release/moc_savedata.o
 
-DIST          =  ..\..\brainstart2\Brainstart2\signaltoolbox.h \
+DIST          =  ..\..\brainstart2\Brainstart2\constants.h \
+		..\..\brainstart2\Brainstart2\signaltoolbox.h \
 		..\..\brainstart2\Brainstart2\feedbackwin.h \
 		..\..\brainstart2\Brainstart2\firwin.h \
 		..\..\brainstart2\Brainstart2\mainwindow.h \
@@ -129,7 +134,9 @@ DIST          =  ..\..\brainstart2\Brainstart2\signaltoolbox.h \
 		..\..\brainstart2\Brainstart2\savedata\fiff_info.h \
 		..\..\brainstart2\Brainstart2\savedata\fiff_info_base.h \
 		..\..\brainstart2\Brainstart2\savedata\fiff_ch_info.h \
-		..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.h ..\..\brainstart2\Brainstart2\signaltoolbox.cpp \
+		..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.h \
+		..\..\brainstart2\Brainstart2\code_iir\IIR.h \
+		..\..\brainstart2\Brainstart2\code_iir\stdafx.h ..\..\brainstart2\Brainstart2\signaltoolbox.cpp \
 		..\..\brainstart2\Brainstart2\feedbackwin.cpp \
 		..\..\brainstart2\Brainstart2\firwin.cpp \
 		..\..\brainstart2\Brainstart2\main.cpp \
@@ -149,7 +156,9 @@ DIST          =  ..\..\brainstart2\Brainstart2\signaltoolbox.h \
 		..\..\brainstart2\Brainstart2\savedata\fiff_info.cpp \
 		..\..\brainstart2\Brainstart2\savedata\fiff_info_base.cpp \
 		..\..\brainstart2\Brainstart2\savedata\fiff_ch_info.cpp \
-		..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.cpp
+		..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.cpp \
+		..\..\brainstart2\Brainstart2\code_iir\IIR.cpp \
+		..\..\brainstart2\Brainstart2\code_iir\stdafx.cpp
 QMAKE_TARGET  = Brainstart2
 DESTDIR        = release\ #avoid trailing-slash linebreak
 TARGET         = Brainstart2.exe
@@ -169,10 +178,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Brainstart2.zip $(SOURCES) $(DIST) ..\..\brainstart2\Brainstart2\Brainstart2.pro C:\Qt\6.4.2\mingw_64\mkspecs\features\spec_pre.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\device_config.prf C:\Qt\6.4.2\mingw_64\mkspecs\common\sanitize.conf C:\Qt\6.4.2\mingw_64\mkspecs\common\gcc-base.conf C:\Qt\6.4.2\mingw_64\mkspecs\common\g++-base.conf C:\Qt\6.4.2\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\Qt\6.4.2\mingw_64\mkspecs\common\windows-vulkan.conf C:\Qt\6.4.2\mingw_64\mkspecs\common\g++-win32.conf C:\Qt\6.4.2\mingw_64\mkspecs\common\windows-desktop.conf C:\Qt\6.4.2\mingw_64\mkspecs\qconfig.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_ext_freetype.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_ext_libpng.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_core.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_help.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labssettings.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_linguist.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_linguist_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_network.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_png_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlintegration_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_tools_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\features\qt_functions.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\qt_config.prf C:\Qt\6.4.2\mingw_64\mkspecs\win32-g++\qmake.conf C:\Qt\6.4.2\mingw_64\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\6.4.2\mingw_64\mkspecs\features\exclusive_builds.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\toolchain.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\default_pre.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\win32\default_pre.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\resolve_config.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\default_post.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\build_pass.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\qml_debug.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\entrypoint.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\precompile_header.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\warn_on.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\qt.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\resources_functions.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\resources.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\moc.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\win32\opengl.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\uic.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\qmake_use.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\file_copies.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\win32\windows.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\testcase_targets.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\exceptions.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\yacc.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\lex.prf ..\..\brainstart2\Brainstart2\Brainstart2.pro C:\Qt\6.4.2\mingw_64\lib\Qt6Widgets.prl C:\Qt\6.4.2\mingw_64\lib\Qt6Gui.prl C:\Qt\6.4.2\mingw_64\lib\Qt6Core.prl C:\Qt\6.4.2\mingw_64\lib\Qt6EntryPoint.prl    C:\Qt\6.4.2\mingw_64\mkspecs\features\data\dummy.cpp ..\..\brainstart2\Brainstart2\signaltoolbox.h ..\..\brainstart2\Brainstart2\feedbackwin.h ..\..\brainstart2\Brainstart2\firwin.h ..\..\brainstart2\Brainstart2\mainwindow.h ..\..\brainstart2\Brainstart2\simplebarfbwin.h ..\..\brainstart2\Brainstart2\utils.h ..\..\brainstart2\Brainstart2\whitekf.h ..\..\brainstart2\Brainstart2\cfir.h ..\..\brainstart2\Brainstart2\kalmanparamchoice.h ..\..\brainstart2\Brainstart2\qcustomplot.h ..\..\brainstart2\Brainstart2\signalplotwin.h ..\..\brainstart2\Brainstart2\savedata.h ..\..\brainstart2\Brainstart2\datareceiver.h ..\..\brainstart2\Brainstart2\idataprocessor.h ..\..\brainstart2\Brainstart2\savedata\fiff.h ..\..\brainstart2\Brainstart2\savedata\fiff_id.h ..\..\brainstart2\Brainstart2\savedata\fiff_types.h ..\..\brainstart2\Brainstart2\savedata\fiff_constants.h ..\..\brainstart2\Brainstart2\savedata\fiff_info.h ..\..\brainstart2\Brainstart2\savedata\fiff_info_base.h ..\..\brainstart2\Brainstart2\savedata\fiff_ch_info.h ..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.h  ..\..\brainstart2\Brainstart2\signaltoolbox.cpp ..\..\brainstart2\Brainstart2\feedbackwin.cpp ..\..\brainstart2\Brainstart2\firwin.cpp ..\..\brainstart2\Brainstart2\main.cpp ..\..\brainstart2\Brainstart2\mainwindow.cpp ..\..\brainstart2\Brainstart2\simplebarfbwin.cpp ..\..\brainstart2\Brainstart2\whitekf.cpp ..\..\brainstart2\Brainstart2\cfir.cpp ..\..\brainstart2\Brainstart2\utils.cpp ..\..\brainstart2\Brainstart2\kalmanparamchoice.cpp ..\..\brainstart2\Brainstart2\qcustomplot.cpp ..\..\brainstart2\Brainstart2\signalplotwin.cpp ..\..\brainstart2\Brainstart2\savedata.cpp ..\..\brainstart2\Brainstart2\datareceiver.cpp ..\..\brainstart2\Brainstart2\idataprocessor.cpp ..\..\brainstart2\Brainstart2\savedata\fiff.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_id.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_info.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_info_base.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_ch_info.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.cpp ..\..\brainstart2\Brainstart2\mainwindow.ui    
+	$(ZIP) Brainstart2.zip $(SOURCES) $(DIST) ..\..\brainstart2\Brainstart2\Brainstart2.pro C:\Qt\6.4.2\mingw_64\mkspecs\features\spec_pre.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\device_config.prf C:\Qt\6.4.2\mingw_64\mkspecs\common\sanitize.conf C:\Qt\6.4.2\mingw_64\mkspecs\common\gcc-base.conf C:\Qt\6.4.2\mingw_64\mkspecs\common\g++-base.conf C:\Qt\6.4.2\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\Qt\6.4.2\mingw_64\mkspecs\common\windows-vulkan.conf C:\Qt\6.4.2\mingw_64\mkspecs\common\g++-win32.conf C:\Qt\6.4.2\mingw_64\mkspecs\common\windows-desktop.conf C:\Qt\6.4.2\mingw_64\mkspecs\qconfig.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_ext_freetype.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_ext_libpng.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_core.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_help.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labssettings.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_linguist.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_linguist_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_network.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_png_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlintegration_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_tools_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\6.4.2\mingw_64\mkspecs\features\qt_functions.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\qt_config.prf C:\Qt\6.4.2\mingw_64\mkspecs\win32-g++\qmake.conf C:\Qt\6.4.2\mingw_64\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\6.4.2\mingw_64\mkspecs\features\exclusive_builds.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\toolchain.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\default_pre.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\win32\default_pre.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\resolve_config.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\default_post.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\build_pass.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\qml_debug.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\entrypoint.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\precompile_header.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\warn_on.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\qt.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\resources_functions.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\resources.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\moc.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\win32\opengl.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\uic.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\qmake_use.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\file_copies.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\win32\windows.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\testcase_targets.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\exceptions.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\yacc.prf C:\Qt\6.4.2\mingw_64\mkspecs\features\lex.prf ..\..\brainstart2\Brainstart2\Brainstart2.pro C:\Qt\6.4.2\mingw_64\lib\Qt6Widgets.prl C:\Qt\6.4.2\mingw_64\lib\Qt6Gui.prl C:\Qt\6.4.2\mingw_64\lib\Qt6Core.prl C:\Qt\6.4.2\mingw_64\lib\Qt6EntryPoint.prl    C:\Qt\6.4.2\mingw_64\mkspecs\features\data\dummy.cpp ..\..\brainstart2\Brainstart2\constants.h ..\..\brainstart2\Brainstart2\signaltoolbox.h ..\..\brainstart2\Brainstart2\feedbackwin.h ..\..\brainstart2\Brainstart2\firwin.h ..\..\brainstart2\Brainstart2\mainwindow.h ..\..\brainstart2\Brainstart2\simplebarfbwin.h ..\..\brainstart2\Brainstart2\utils.h ..\..\brainstart2\Brainstart2\whitekf.h ..\..\brainstart2\Brainstart2\cfir.h ..\..\brainstart2\Brainstart2\kalmanparamchoice.h ..\..\brainstart2\Brainstart2\qcustomplot.h ..\..\brainstart2\Brainstart2\signalplotwin.h ..\..\brainstart2\Brainstart2\savedata.h ..\..\brainstart2\Brainstart2\datareceiver.h ..\..\brainstart2\Brainstart2\idataprocessor.h ..\..\brainstart2\Brainstart2\savedata\fiff.h ..\..\brainstart2\Brainstart2\savedata\fiff_id.h ..\..\brainstart2\Brainstart2\savedata\fiff_types.h ..\..\brainstart2\Brainstart2\savedata\fiff_constants.h ..\..\brainstart2\Brainstart2\savedata\fiff_info.h ..\..\brainstart2\Brainstart2\savedata\fiff_info_base.h ..\..\brainstart2\Brainstart2\savedata\fiff_ch_info.h ..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.h ..\..\brainstart2\Brainstart2\code_iir\IIR.h ..\..\brainstart2\Brainstart2\code_iir\stdafx.h  ..\..\brainstart2\Brainstart2\signaltoolbox.cpp ..\..\brainstart2\Brainstart2\feedbackwin.cpp ..\..\brainstart2\Brainstart2\firwin.cpp ..\..\brainstart2\Brainstart2\main.cpp ..\..\brainstart2\Brainstart2\mainwindow.cpp ..\..\brainstart2\Brainstart2\simplebarfbwin.cpp ..\..\brainstart2\Brainstart2\whitekf.cpp ..\..\brainstart2\Brainstart2\cfir.cpp ..\..\brainstart2\Brainstart2\utils.cpp ..\..\brainstart2\Brainstart2\kalmanparamchoice.cpp ..\..\brainstart2\Brainstart2\qcustomplot.cpp ..\..\brainstart2\Brainstart2\signalplotwin.cpp ..\..\brainstart2\Brainstart2\savedata.cpp ..\..\brainstart2\Brainstart2\datareceiver.cpp ..\..\brainstart2\Brainstart2\idataprocessor.cpp ..\..\brainstart2\Brainstart2\savedata\fiff.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_id.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_info.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_info_base.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_ch_info.cpp ..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.cpp ..\..\brainstart2\Brainstart2\code_iir\IIR.cpp ..\..\brainstart2\Brainstart2\code_iir\stdafx.cpp ..\..\brainstart2\Brainstart2\mainwindow.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\signaltoolbox.o release\feedbackwin.o release\firwin.o release\main.o release\mainwindow.o release\simplebarfbwin.o release\whitekf.o release\cfir.o release\utils.o release\kalmanparamchoice.o release\qcustomplot.o release\signalplotwin.o release\savedata.o release\datareceiver.o release\idataprocessor.o release\fiff.o release\fiff_id.o release\fiff_info.o release\fiff_info_base.o release\fiff_ch_info.o release\fiff_ch_pos.o release\moc_signaltoolbox.o release\moc_feedbackwin.o release\moc_mainwindow.o release\moc_simplebarfbwin.o release\moc_kalmanparamchoice.o release\moc_qcustomplot.o release\moc_signalplotwin.o release\moc_savedata.o
+	-$(DEL_FILE) release\signaltoolbox.o release\feedbackwin.o release\firwin.o release\main.o release\mainwindow.o release\simplebarfbwin.o release\whitekf.o release\cfir.o release\utils.o release\kalmanparamchoice.o release\qcustomplot.o release\signalplotwin.o release\savedata.o release\datareceiver.o release\idataprocessor.o release\fiff.o release\fiff_id.o release\fiff_info.o release\fiff_info_base.o release\fiff_ch_info.o release\fiff_ch_pos.o release\IIR.o release\stdafx.o release\moc_signaltoolbox.o release\moc_feedbackwin.o release\moc_mainwindow.o release\moc_simplebarfbwin.o release\moc_kalmanparamchoice.o release\moc_qcustomplot.o release\moc_signalplotwin.o release\moc_savedata.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -1266,6 +1275,7 @@ release/moc_mainwindow.cpp: ../../brainstart2/Brainstart2/mainwindow.h \
 		../../brainstart2/Brainstart2/signalplotwin.h \
 		../../brainstart2/Brainstart2/datareceiver.h \
 		../../brainstart2/Brainstart2/cfir.h \
+		../../brainstart2/Brainstart2/simplebarfbwin.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_cpp.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_c.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/common.h \
@@ -1277,7 +1287,7 @@ release/moc_mainwindow.cpp: ../../brainstart2/Brainstart2/mainwindow.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/xml.h \
 		../../brainstart2/Brainstart2/savedata.h \
 		../../brainstart2/Brainstart2/firwin.h \
-		../../brainstart2/Brainstart2/simplebarfbwin.h \
+		../../brainstart2/Brainstart2/code_iir/IIR.h \
 		release/moc_predefs.h \
 		C:/Qt/6.4.2/mingw_64/bin/moc.exe
 	C:\Qt\6.4.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Fedosov/Documents/projects/Brainstart/build-Brainstart2-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.4.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Fedosov/Documents/projects/brainstart2/Brainstart2 -IC:/Users/Fedosov/Documents/projects/brainstart2/Brainstart2/liblsl-master/include -IC:/Qt/6.4.2/mingw_64/include -IC:/Qt/6.4.2/mingw_64/include/QtWidgets -IC:/Qt/6.4.2/mingw_64/include/QtGui -IC:/Qt/6.4.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\brainstart2\Brainstart2\mainwindow.h -o release\moc_mainwindow.cpp
@@ -3136,6 +3146,7 @@ release/moc_signalplotwin.cpp: ../../brainstart2/Brainstart2/signalplotwin.h \
 		../Brainstart/eigen-3.4.0/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
 		../Brainstart/eigen-3.4.0/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h \
 		../../brainstart2/Brainstart2/cfir.h \
+		../../brainstart2/Brainstart2/simplebarfbwin.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_cpp.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_c.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/common.h \
@@ -3147,7 +3158,7 @@ release/moc_signalplotwin.cpp: ../../brainstart2/Brainstart2/signalplotwin.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/xml.h \
 		../../brainstart2/Brainstart2/savedata.h \
 		../../brainstart2/Brainstart2/firwin.h \
-		../../brainstart2/Brainstart2/simplebarfbwin.h \
+		../../brainstart2/Brainstart2/code_iir/IIR.h \
 		release/moc_predefs.h \
 		C:/Qt/6.4.2/mingw_64/bin/moc.exe
 	C:\Qt\6.4.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Fedosov/Documents/projects/Brainstart/build-Brainstart2-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.4.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Fedosov/Documents/projects/brainstart2/Brainstart2 -IC:/Users/Fedosov/Documents/projects/brainstart2/Brainstart2/liblsl-master/include -IC:/Qt/6.4.2/mingw_64/include -IC:/Qt/6.4.2/mingw_64/include/QtWidgets -IC:/Qt/6.4.2/mingw_64/include/QtGui -IC:/Qt/6.4.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\brainstart2\Brainstart2\signalplotwin.h -o release\moc_signalplotwin.cpp
@@ -4798,6 +4809,7 @@ release/main.o: ../../brainstart2/Brainstart2/main.cpp ../../brainstart2/Brainst
 		../../brainstart2/Brainstart2/signalplotwin.h \
 		../../brainstart2/Brainstart2/datareceiver.h \
 		../../brainstart2/Brainstart2/cfir.h \
+		../../brainstart2/Brainstart2/simplebarfbwin.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_cpp.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_c.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/common.h \
@@ -4809,7 +4821,7 @@ release/main.o: ../../brainstart2/Brainstart2/main.cpp ../../brainstart2/Brainst
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/xml.h \
 		../../brainstart2/Brainstart2/savedata.h \
 		../../brainstart2/Brainstart2/firwin.h \
-		../../brainstart2/Brainstart2/simplebarfbwin.h \
+		../../brainstart2/Brainstart2/code_iir/IIR.h \
 		C:/Qt/6.4.2/mingw_64/include/QtWidgets/QApplication
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\brainstart2\Brainstart2\main.cpp
 
@@ -5599,6 +5611,7 @@ release/mainwindow.o: ../../brainstart2/Brainstart2/mainwindow.cpp ../../brainst
 		../../brainstart2/Brainstart2/signalplotwin.h \
 		../../brainstart2/Brainstart2/datareceiver.h \
 		../../brainstart2/Brainstart2/cfir.h \
+		../../brainstart2/Brainstart2/simplebarfbwin.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_cpp.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_c.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/common.h \
@@ -5610,8 +5623,11 @@ release/mainwindow.o: ../../brainstart2/Brainstart2/mainwindow.cpp ../../brainst
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/xml.h \
 		../../brainstart2/Brainstart2/savedata.h \
 		../../brainstart2/Brainstart2/firwin.h \
-		../../brainstart2/Brainstart2/simplebarfbwin.h \
+		../../brainstart2/Brainstart2/code_iir/IIR.h \
 		ui_mainwindow.h \
+		C:/Qt/6.4.2/mingw_64/include/QtWidgets/QApplication \
+		C:/Qt/6.4.2/mingw_64/include/QtWidgets/QMenuBar \
+		C:/Qt/6.4.2/mingw_64/include/QtWidgets/QStatusBar \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/QtGlobal
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\..\brainstart2\Brainstart2\mainwindow.cpp
 
@@ -6055,61 +6071,6 @@ release/whitekf.o: ../../brainstart2/Brainstart2/whitekf.cpp ../../brainstart2/B
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\whitekf.o ..\..\brainstart2\Brainstart2\whitekf.cpp
 
 release/cfir.o: ../../brainstart2/Brainstart2/cfir.cpp ../../brainstart2/Brainstart2/cfir.h \
-		../../brainstart2/Brainstart2/idataprocessor.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/QVector \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qvector.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qlist.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydatapointer.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydataops.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydata.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qpair.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qglobal.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qconfig-bootstrapped.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qconfig.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtcore-config.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtconfigmacros.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtcoreexports.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qsystemdetection.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qprocessordetection.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qcompilerdetection.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtypeinfo.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qcontainerfwd.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qsysinfo.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qlogging.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qflags.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qcompare_impl.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbasicatomic.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic_bootstrap.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qgenericatomic.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic_cxx11.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qglobalstatic.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qnumeric.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qversiontagging.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qforeach.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qcontainertools_impl.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qnamespace.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtmetamacros.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qhashfunctions.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstring.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qchar.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringview.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearray.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qrefcount.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearrayview.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringfwd.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringliteral.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringalgorithms.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qanystringview.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qutf8stringview.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringtokenizer.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringbuilder.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qiterator.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearraylist.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringlist.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qalgorithms.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringmatcher.h \
 		C:/Users/Fedosov/Documents/projects/Brainstart/Brainstart/eigen-3.4.0/Eigen/Dense \
 		../Brainstart/eigen-3.4.0/Eigen/Core \
 		../Brainstart/eigen-3.4.0/Eigen/src/Core/util/DisableStupidWarnings.h \
@@ -8313,6 +8274,7 @@ release/signalplotwin.o: ../../brainstart2/Brainstart2/signalplotwin.cpp ../../b
 		../Brainstart/eigen-3.4.0/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h \
 		../Brainstart/eigen-3.4.0/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h \
 		../../brainstart2/Brainstart2/cfir.h \
+		../../brainstart2/Brainstart2/simplebarfbwin.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_cpp.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_c.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/common.h \
@@ -8324,8 +8286,9 @@ release/signalplotwin.o: ../../brainstart2/Brainstart2/signalplotwin.cpp ../../b
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/xml.h \
 		../../brainstart2/Brainstart2/savedata.h \
 		../../brainstart2/Brainstart2/firwin.h \
-		../../brainstart2/Brainstart2/simplebarfbwin.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/QThread
+		../../brainstart2/Brainstart2/code_iir/IIR.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/QThread \
+		../../brainstart2/Brainstart2/constants.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\signalplotwin.o ..\..\brainstart2\Brainstart2\signalplotwin.cpp
 
 release/savedata.o: ../../brainstart2/Brainstart2/savedata.cpp ../../brainstart2/Brainstart2/savedata.h \
@@ -8678,61 +8641,6 @@ release/savedata.o: ../../brainstart2/Brainstart2/savedata.cpp ../../brainstart2
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\savedata.o ..\..\brainstart2\Brainstart2\savedata.cpp
 
 release/datareceiver.o: ../../brainstart2/Brainstart2/datareceiver.cpp ../../brainstart2/Brainstart2/cfir.h \
-		../../brainstart2/Brainstart2/idataprocessor.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/QVector \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qvector.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qlist.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydatapointer.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydataops.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydata.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qpair.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qglobal.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qconfig-bootstrapped.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qconfig.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtcore-config.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtconfigmacros.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtcoreexports.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qsystemdetection.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qprocessordetection.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qcompilerdetection.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtypeinfo.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qcontainerfwd.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qsysinfo.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qlogging.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qflags.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qcompare_impl.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbasicatomic.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic_bootstrap.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qgenericatomic.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic_cxx11.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qglobalstatic.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qnumeric.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qversiontagging.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qforeach.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qcontainertools_impl.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qnamespace.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qtmetamacros.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qhashfunctions.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstring.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qchar.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringview.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearray.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qrefcount.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearrayview.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringfwd.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringliteral.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringalgorithms.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qanystringview.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qutf8stringview.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringtokenizer.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringbuilder.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qiterator.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearraylist.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringlist.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qalgorithms.h \
-		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringmatcher.h \
 		C:/Users/Fedosov/Documents/projects/Brainstart/Brainstart/eigen-3.4.0/Eigen/Dense \
 		../Brainstart/eigen-3.4.0/Eigen/Core \
 		../Brainstart/eigen-3.4.0/Eigen/src/Core/util/DisableStupidWarnings.h \
@@ -8978,15 +8886,67 @@ release/datareceiver.o: ../../brainstart2/Brainstart2/datareceiver.cpp ../../bra
 		C:/Qt/6.4.2/mingw_64/include/QtWidgets/qwidget.h \
 		C:/Qt/6.4.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/6.4.2/mingw_64/include/QtGui/qtguiglobal.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qglobal.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qconfig-bootstrapped.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qconfig.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qtcore-config.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qtconfigmacros.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qtcoreexports.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qsystemdetection.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qprocessordetection.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qcompilerdetection.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qtypeinfo.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qcontainerfwd.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qsysinfo.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qlogging.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qflags.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qcompare_impl.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qbasicatomic.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qgenericatomic.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qglobalstatic.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qnumeric.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qversiontagging.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qforeach.h \
 		C:/Qt/6.4.2/mingw_64/include/QtGui/qtgui-config.h \
 		C:/Qt/6.4.2/mingw_64/include/QtGui/qtguiexports.h \
 		C:/Qt/6.4.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
 		C:/Qt/6.4.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
 		C:/Qt/6.4.2/mingw_64/include/QtGui/qwindowdefs.h \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/qobjectdefs.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qnamespace.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qtmetamacros.h \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
 		C:/Qt/6.4.2/mingw_64/include/QtGui/qwindowdefs_win.h \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/qobject.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstring.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qchar.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringview.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearray.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qrefcount.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydata.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qpair.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydatapointer.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydataops.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qcontainertools_impl.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearrayview.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringfwd.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringliteral.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringalgorithms.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qanystringview.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qutf8stringview.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringtokenizer.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringbuilder.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qlist.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qhashfunctions.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qiterator.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qbytearraylist.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringlist.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qalgorithms.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/qcoreevent.h \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/qscopedpointer.h \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/qmetatype.h \
@@ -9077,6 +9037,10 @@ release/datareceiver.o: ../../brainstart2/Brainstart2/datareceiver.cpp ../../bra
 		C:/Qt/6.4.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/6.4.2/mingw_64/include/QtWidgets/qrubberband.h \
 		../../brainstart2/Brainstart2/whitekf.h \
+		../../brainstart2/Brainstart2/idataprocessor.h \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/QVector \
+		C:/Qt/6.4.2/mingw_64/include/QtCore/qvector.h \
+		../../brainstart2/Brainstart2/simplebarfbwin.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_cpp.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl_c.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/common.h \
@@ -9086,6 +9050,7 @@ release/datareceiver.o: ../../brainstart2/Brainstart2/datareceiver.cpp ../../bra
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/resolver.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/streaminfo.h \
 		../../brainstart2/Brainstart2/liblsl-master/include/lsl/xml.h \
+		../../brainstart2/Brainstart2/code_iir/IIR.h \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\datareceiver.o ..\..\brainstart2\Brainstart2\datareceiver.cpp
 
@@ -11006,6 +10971,13 @@ release/fiff_ch_pos.o: ../../brainstart2/Brainstart2/savedata/fiff_ch_pos.cpp ..
 		C:/Qt/6.4.2/mingw_64/include/QtCore/qbindingstorage.h \
 		C:/Qt/6.4.2/mingw_64/include/QtCore/QSharedPointer
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\fiff_ch_pos.o ..\..\brainstart2\Brainstart2\savedata\fiff_ch_pos.cpp
+
+release/IIR.o: ../../brainstart2/Brainstart2/code_iir/IIR.cpp ../../brainstart2/Brainstart2/code_iir/stdafx.h \
+		../../brainstart2/Brainstart2/code_iir/IIR.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\IIR.o ..\..\brainstart2\Brainstart2\code_iir\IIR.cpp
+
+release/stdafx.o: ../../brainstart2/Brainstart2/code_iir/stdafx.cpp ../../brainstart2/Brainstart2/code_iir/stdafx.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\stdafx.o ..\..\brainstart2\Brainstart2\code_iir\stdafx.cpp
 
 release/moc_signaltoolbox.o: release/moc_signaltoolbox.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_signaltoolbox.o release\moc_signaltoolbox.cpp
