@@ -35,7 +35,7 @@ struct qt_meta_stringdata_MainWindow_t {
     char stringdata3[25];
     char stringdata4[21];
     char stringdata5[21];
-    char stringdata6[13];
+    char stringdata6[15];
     char stringdata7[12];
     char stringdata8[12];
 };
@@ -49,9 +49,9 @@ Q_CONSTINIT static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_Main
         QT_MOC_LITERAL(32, 24),  // "onsetKalmanButtonclicked"
         QT_MOC_LITERAL(57, 20),  // "onfindStreamsClicked"
         QT_MOC_LITERAL(78, 20),  // "handleStreamSelected"
-        QT_MOC_LITERAL(99, 12),  // "onLoadParams"
-        QT_MOC_LITERAL(112, 11),  // "onQ0changed"
-        QT_MOC_LITERAL(124, 11)   // "onQ1changed"
+        QT_MOC_LITERAL(99, 14),  // "LoadParameters"
+        QT_MOC_LITERAL(114, 11),  // "onQ0changed"
+        QT_MOC_LITERAL(126, 11)   // "onQ1changed"
     },
     "MainWindow",
     "ondemoButtonclicked",
@@ -59,7 +59,7 @@ Q_CONSTINIT static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_Main
     "onsetKalmanButtonclicked",
     "onfindStreamsClicked",
     "handleStreamSelected",
-    "onLoadParams",
+    "LoadParameters",
     "onQ0changed",
     "onQ1changed"
 };
@@ -117,7 +117,7 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'handleStreamSelected'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'onLoadParams'
+        // method 'LoadParameters'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'onQ0changed'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
@@ -137,7 +137,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->onsetKalmanButtonclicked(); break;
         case 2: _t->onfindStreamsClicked(); break;
         case 3: _t->handleStreamSelected(); break;
-        case 4: _t->onLoadParams(); break;
+        case 4: _t->LoadParameters(); break;
         case 5: _t->onQ0changed(); break;
         case 6: _t->onQ1changed(); break;
         default: ;
